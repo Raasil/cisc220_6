@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include<stdlib.h>
 #include <pthread.h>
+#include <string.h>
+
 #define NUM_THREADS 5
 void * print_hello(void *threadid) {
 	long tid;
@@ -10,7 +12,21 @@ void * print_hello(void *threadid) {
 	pthread_exit(NULL);
 }
 
+void print_screen() {
+        system("clear");
+        printf("Welcome to the CISC220 Racing Arena\n");
+        printf("Hit Enter to move forward\n");
+        printf("|->                                        # Lane 1 #\n");
+        printf("|->                                        # Lane 2 #\n");
+        printf("|->                                        # Lane 3 #\n");
+        printf("|->                                        # Lane 4 #\n");
+        printf("|->                                        # Lane 5 #\n");
+
+}
+
+
 int main (int argc, char *argv[]) {
+	print_screen();
 	pthread_t threads[NUM_THREADS];
 	int rc;
 	long t;
