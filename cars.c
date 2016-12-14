@@ -4,31 +4,68 @@
 #include <string.h>
 
 #define NUM_THREADS 5
+
+int userDist;
+int distCar1;
+int distCar2;
+int distCar3;
+int distCar4;
+
 void * print_hello(void *threadid) {
 	long tid;
 	tid = (long) threadid;
-	//sleep(tid);
+//	sleep(tid);
 //	printf("Hello World! It’s me, thread #%ld!\n", tid);
+
+
+	while ( distCar1 != 40 && distCar2 != 40 && distCar3 != 40 && distCar4 != 40 ) {
+		srand ( time(NULL) );
+  		float randomNumber = rand() % 100;
+		float sleepNumber = (randomNumber/1000);
+  		usleep(sleepNumber);
+	
+		print_screen(userDist, distCar1, distCar2, distCar3, distCar4);
+	} 
+
 	pthread_exit(NULL);
 }
 
-void print_screen() {
-	char userDist = "~";
-	char *userSpace = "     ";
+void print_screen(int userDist, int distCar1, int distCar2, int distCar3, int distCar4) {
+	char *tildas = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+	char *spaces = "                                        ";
+	int userSpace = 40 - userDist;
+	int car1Space = 40 - distCar1;
+	int car2Space = 40 - distCar2;
+	int car3Space = 40 - distCar3;
+	int car4Space = 40 - distCar4;
 
 	system("clear");
 	printf("Welcome to the CISC220 Racing Arena\n");
         printf("Hit Enter to move forward\n");
-//        printf( "%c" + "|->" + userSpace + "# Lane 1 #\n");
-        printf("|->                                        # Lane 2 #\n");
-        printf("|->                                        # Lane 3 #\n");
-        printf("|->                                        # Lane 4 #\n");
-        printf("|->                                        # Lane 5 #\n");
+        printf( "%.*s|->%.*s# Lane 1 #\n", distCar1, tildas, car1Space, spaces);
+	printf( "%.*s|->%.*s# Lane 2 #\n", distCar2, tildas, car2Space, spaces);
+	printf( "%.*s|->%.*s# Lane 3 #\n", distCar3, tildas, car3Space, spaces);
+	printf( "%.*s|->%.*s# Lane 4 #\n", distCar4, tildas, car4Space, spaces);
+	printf( "%.*s|->%.*s# Lane 5 #\n", userDist, tildas, userSpace, spaces);
 }
 
+void user() {
+        char x;
+        //user begins at the starting line
+        userDist = 0;
+        while (userDist != 40) {
+                //take input from the command line
+                x = getchar();
+                //if input is "enter", we increment userDist
+                if (x == '\n') {
+                        userDist++;
+			print_screen(userDist, distCar1, distCar2, distCar3, distCar4);
+                }
+        }
+}
 
 int main (int argc, char *argv[]) {
-	print_screen();
+	user();
 	pthread_t threads[NUM_THREADS];
 	int rc;
 	long t;
