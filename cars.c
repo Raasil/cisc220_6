@@ -8,12 +8,21 @@ void * print_hello(void *threadid) {
 	long tid;
 	tid = (long) threadid;
 	//sleep(tid);
-	printf("Hello World! It’s me, thread #%ld!\n", tid);
+//	printf("Hello World! It’s me, thread #%ld!\n", tid);
 	pthread_exit(NULL);
 }
 
 void print_screen() {
-        system("clear");
+	system("clear");
+
+	int arr[] = {1,1,1,0,0};
+	int i;
+	for (i = 0; i < sizeof(arr); i++) {
+		if ( arr[i] == 1 ) {
+			printf("-");
+		}
+	}
+
         printf("Welcome to the CISC220 Racing Arena\n");
         printf("Hit Enter to move forward\n");
         printf("|->                                        # Lane 1 #\n");
@@ -21,7 +30,6 @@ void print_screen() {
         printf("|->                                        # Lane 3 #\n");
         printf("|->                                        # Lane 4 #\n");
         printf("|->                                        # Lane 5 #\n");
-
 }
 
 
@@ -31,7 +39,7 @@ int main (int argc, char *argv[]) {
 	int rc;
 	long t;
 	for (t = 0; t < NUM_THREADS; t++) {
-		printf("In main: creating thread %ld\n", t);
+//		printf("In main: creating thread %ld\n", t);
 		rc = pthread_create(threads + t, NULL, print_hello, (void *) t);
 		if (rc) {
 			printf("ERROR; return code from pthread_create() is %d\n", rc);
