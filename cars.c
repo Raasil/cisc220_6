@@ -18,15 +18,6 @@ void * print_hello(void *threadid) {
 //	printf("Hello World! It’s me, thread #%ld!\n", tid);
 
 
-	while ( distCar1 != 40 && distCar2 != 40 && distCar3 != 40 && distCar4 != 40 ) {
-		srand ( time(NULL) );
-  		float randomNumber = rand() % 100;
-		float sleepNumber = (randomNumber/1000);
-  		usleep(sleepNumber);
-	
-		print_screen(userDist, distCar1, distCar2, distCar3, distCar4);
-	} 
-
 	pthread_exit(NULL);
 }
 
@@ -49,6 +40,19 @@ void print_screen(int userDist, int distCar1, int distCar2, int distCar3, int di
 	printf( "%.*s|->%.*s# Lane 5 #\n", userDist, tildas, userSpace, spaces);
 }
 
+void carMemes() {
+	while ( distCar1 != 40 && distCar2 != 40 && distCar3 != 40 && distCar4 != 40 ) {
+                srand ( time(NULL) );
+                float randomNumber = rand() % 100;
+                float sleepNumber = (randomNumber/1000);
+                usleep(sleepNumber);
+
+                print_screen(userDist, distCar1, distCar2, distCar3, distCar4);
+        }
+}
+
+
+
 void user() {
         char x;
         //user begins at the starting line
@@ -66,6 +70,7 @@ void user() {
 
 int main (int argc, char *argv[]) {
 	user();
+	carMemes();
 	pthread_t threads[NUM_THREADS];
 	int rc;
 	long t;
