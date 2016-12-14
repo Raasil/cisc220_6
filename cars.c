@@ -34,21 +34,36 @@ void print_screen(int userDist, int distCar1, int distCar2, int distCar3, int di
 	system("clear");
 	printf("Welcome to the CISC220 Racing Arena\n");
         printf("Hit Enter to move forward\n");
-        printf( "%.*s|->%.*s# Lane 1 #\n", distCar1, tildas, car1Space, spaces);
-	printf( "%.*s|->%.*s# Lane 2 #\n", distCar2, tildas, car2Space, spaces);
-	printf( "%.*s|->%.*s# Lane 3 #\n", distCar3, tildas, car3Space, spaces);
-	printf( "%.*s|->%.*s# Lane 4 #\n", distCar4, tildas, car4Space, spaces);
-	printf( "%.*s|->%.*s# Lane 5 #\n", userDist, tildas, userSpace, spaces);
+	printf( "%.*s|->%.*s# Lane 1 #\n", userDist, tildas, userSpace, spaces);
+        printf( "%.*s|->%.*s# Lane 2 #\n", distCar1, tildas, car1Space, spaces);
+	printf( "%.*s|->%.*s# Lane 3 #\n", distCar2, tildas, car2Space, spaces);
+	printf( "%.*s|->%.*s# Lane 4 #\n", distCar3, tildas, car3Space, spaces);
+	printf( "%.*s|->%.*s# Lane 5 #\n", distCar4, tildas, car4Space, spaces);
 }
 
 void carMemes() {
 	while ( distCar1 != 40 && distCar2 != 40 && distCar3 != 40 && distCar4 != 40 ) {
-                srand ( time(NULL) );
-                float randomNumber = rand() % 100;
-                float sleepNumber = (randomNumber/1000);
-		printf("\n%f\n", sleepNumber);
-                usleep(sleepNumber);
+                srand ( 1 );
+                float randomNumber1 = rand() % 100000;
+//		printf("\n%f\n", sleepNumber);
+                usleep(randomNumber1);
 		distCar1++;
+                srand ( 2 );
+                float randomNumber2 = rand() % 100000;
+//              printf("\n%f\n", sleepNumber);
+                usleep(randomNumber2);
+		distCar2++;
+                srand ( 3 );
+                float randomNumber3 = rand() % 100000;
+//              printf("\n%f\n", sleepNumber);
+                usleep(randomNumber3);
+		distCar3++;
+                srand ( 4 );
+                float randomNumber4 = rand() % 100000;
+//              printf("\n%f\n", sleepNumber);
+                usleep(randomNumber4);
+		distCar4++;
+		usleep(20000);
                 print_screen(userDist, distCar1, distCar2, distCar3, distCar4);
         }
 }
@@ -76,6 +91,10 @@ int main (int argc, char *argv[]) {
 	pthread_t threads[NUM_THREADS];
 	int rc;
 	long t;
+//                srand ( time(NULL) );
+//                float randomNumber = rand() % 100000;
+//              printf("\n%f\n", sleepNumber);
+//                usleep(randomNumber);	
 	for (t = 0; t < NUM_THREADS; t++) {
 //		printf("In main: creating thread %ld\n", t);
 		rc = pthread_create(threads + t, NULL, print_hello, (void *) t);
