@@ -2,7 +2,8 @@
 #include<stdlib.h>
 #include <pthread.h>
 #include <string.h>
-
+#include <unistd.h>
+#include <time.h>
 #define NUM_THREADS 5
 
 int userDist;
@@ -45,8 +46,9 @@ void carMemes() {
                 srand ( time(NULL) );
                 float randomNumber = rand() % 100;
                 float sleepNumber = (randomNumber/1000);
+		printf("\n%f\n", sleepNumber);
                 usleep(sleepNumber);
-
+		distCar1++;
                 print_screen(userDist, distCar1, distCar2, distCar3, distCar4);
         }
 }
@@ -58,7 +60,8 @@ void user() {
         //user begins at the starting line
         userDist = 0;
         while (userDist != 40) {
-                //take input from the command line
+        	carMemes();
+	        //take input from the command line
                 x = getchar();
                 //if input is "enter", we increment userDist
                 if (x == '\n') {
@@ -70,7 +73,6 @@ void user() {
 
 int main (int argc, char *argv[]) {
 	user();
-	carMemes();
 	pthread_t threads[NUM_THREADS];
 	int rc;
 	long t;
