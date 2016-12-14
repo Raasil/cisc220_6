@@ -13,19 +13,13 @@ void * print_hello(void *threadid) {
 }
 
 void print_screen() {
+	char userDist = "~";
+	char *userSpace = "     ";
+
 	system("clear");
-
-	int arr[] = {1,1,1,0,0};
-	int i;
-	for (i = 0; i < sizeof(arr); i++) {
-		if ( arr[i] == 1 ) {
-			printf("-");
-		}
-	}
-
-        printf("Welcome to the CISC220 Racing Arena\n");
+	printf("Welcome to the CISC220 Racing Arena\n");
         printf("Hit Enter to move forward\n");
-        printf("|->                                        # Lane 1 #\n");
+//        printf( "%c" + "|->" + userSpace + "# Lane 1 #\n");
         printf("|->                                        # Lane 2 #\n");
         printf("|->                                        # Lane 3 #\n");
         printf("|->                                        # Lane 4 #\n");
